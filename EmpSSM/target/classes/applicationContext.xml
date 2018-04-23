@@ -10,9 +10,12 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Spring的配置文件，这里主要配置和业务逻辑有关的 -->
-	<context:component-scan base-package="nsu.edu.cn.zsq">
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
+<!-- 	<context:component-scan base-package="nsu.edu.cn.zsq"> -->
+		<!-- 除了控制器 -->
+<!-- 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
+<!-- 	</context:component-scan> -->
+<!-- 	<context:component-scan base-package="nsu.edu.cn.zsq.service"></context:component-scan> -->
+	<bean id="empServiceImpl" class="nsu.edu.cn.zsq.service.impl.EmpServiceImpl"></bean>
 	
 	<!-- =================================数据源======================================== -->
 	<context:property-placeholder location="classpath:dbconfig.properties"/>
@@ -35,6 +38,12 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 扫描所有dao接口的实现，加入到ioc容器中 -->
 		<property name="basePackage" value="nsu.edu.cn.zsq.dao"></property>
+	</bean>
+	
+	<!-- 配置一个可以批量处理的sqlSession -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		 <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+		 <constructor-arg name="executorType" value="BATCH"></constructor-arg>
 	</bean>
 	<!-- =========================================================================== -->
 	

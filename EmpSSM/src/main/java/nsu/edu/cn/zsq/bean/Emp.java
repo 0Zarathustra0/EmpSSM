@@ -20,7 +20,24 @@ public class Emp implements Serializable{
     private Double         comm;    // 员工奖金
     private Integer        deptno;  // 部门编号
 
-    // 设置上述属性getters/setters系列方法
+    public Emp() {
+		// TODO Auto-generated constructor stub
+	}
+    
+    public Emp(Integer empno, String ename, String job, Integer mgr, Date hiredate, Double sal, Double comm,
+			Integer deptno) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.job = job;
+		this.mgr = mgr;
+		this.hiredate = hiredate;
+		this.sal = sal;
+		this.comm = comm;
+		this.deptno = deptno;
+	}
+
+	// 设置上述属性getters/setters系列方法
     public Integer getEmpno()
     {
         return empno;
