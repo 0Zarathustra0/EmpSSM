@@ -11,4 +11,8 @@
 	<typeAliases>
 		<package name="nsu.edu.cn.zsq.bean"/>
 	</typeAliases>
+	
+	<plugins>
+		<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+	</plugins>
 </configuration>

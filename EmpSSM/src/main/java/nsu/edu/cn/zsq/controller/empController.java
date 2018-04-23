@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import nsu.edu.cn.zsq.bean.Emp;
 import nsu.edu.cn.zsq.service.EmpService;
 
@@ -27,8 +30,13 @@ public class empController {
 		 * 分页查询
 		 * 需要引入pageHelper插件
 		 * */
+		//传入的页码，每页显示的数据条数
+		PageHelper.startPage(pn,6);
 		List<Emp> emps = empService.getEmps();
-		model.addAttribute("emps",emps);
+		//使用PageInfo包装查询后的结果，只需将pageInfo返回给页面即可
+		//5：连续显示的页码数
+		PageInfo pageInfo = new PageInfo(emps,5);
+		model.addAttribute("pageInfo",pageInfo);
 		return "list";
 	}
 }
