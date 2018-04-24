@@ -6,17 +6,19 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>list</title>
 <%
-	pageContext.setAttribute("pagePath",request.getContextPath());
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<base href="<%=basePath%>static/"/>
 <!-- 路径问题
 1.不以/开头的路径，是以当前路径为基准的
 2.以/开头的路径，是以当前服务器根路径为基准的（http:localhost:8080）
 
  -->
 <!-- 引入樣式 -->
- <link href="static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
- <script src="${pagePath }/WEB-INF/static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
- <script src="${pagePath }/WEB-INF/static/bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
+ <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+ <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+ <script src="bootstrap-3.3.7-dist/js/bootstrap.min.js" ></script>
 </head>
 <body>
 	<div class="container">
