@@ -6,7 +6,7 @@ import nsu.edu.cn.zsq.bean.Dept;
 
 
 /**
- * project_name:StudyMybatis <br>
+ * project_name:EmpSSM <br>
  * user:师哥<br>
  * date:2018年1月23日 <br>
  * 定义部门增删改查接口

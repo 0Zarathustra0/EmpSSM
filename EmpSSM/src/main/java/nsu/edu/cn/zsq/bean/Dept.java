@@ -1,7 +1,7 @@
 package nsu.edu.cn.zsq.bean;
 import java.io.Serializable;
 /**
- * project_name:mybatis-demo
+ * project_name:EmpSSM
  * user:师哥
  * date:2018年1月23日
  * 实体类：部门

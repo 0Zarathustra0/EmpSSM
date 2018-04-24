@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * project_name:StudyMybatis
+ * project_name:EmpSSM
  * user:师哥
  * date:2018年1月23日
  * 
