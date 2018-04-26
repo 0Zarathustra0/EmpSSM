@@ -25,7 +25,7 @@ public class empController {
 	@Autowired
 	private EmpService empService;
 	
-//	@RequestMapping("list")
+	@RequestMapping("list")
 	@ResponseBody
 	public PageInfo list(@RequestParam(value="pn",defaultValue="1")Integer pn) {
 		PageHelper.startPage(pn,6);
@@ -36,7 +36,7 @@ public class empController {
 		return pageInfo;
 	}
 	
-	@RequestMapping("list")
+//	@RequestMapping("list")
 	public String list(@RequestParam(value="pn",defaultValue="1")Integer pn,Model model) {
 		/*
 		 * 分页查询
