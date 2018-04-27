@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class Emp implements Serializable{
 	 // 定义属性
-    private Integer empno;   // 员工编号
+    private Integer        empno;   // 员工编号
     private String         ename;   // 员工姓名
     private String         job;     // 员工职位
     private Integer        mgr;     // 领导编号

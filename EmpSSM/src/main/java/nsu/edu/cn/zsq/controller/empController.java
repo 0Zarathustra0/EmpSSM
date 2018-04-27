@@ -13,6 +13,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import nsu.edu.cn.zsq.bean.Emp;
+import nsu.edu.cn.zsq.bean.Msg;
 import nsu.edu.cn.zsq.service.EmpService;
 
 /** 
@@ -27,13 +28,13 @@ public class empController {
 	
 	@RequestMapping("list")
 	@ResponseBody
-	public PageInfo list(@RequestParam(value="pn",defaultValue="1")Integer pn) {
+	public Msg list(@RequestParam(value="pn",defaultValue="1")Integer pn) {
 		PageHelper.startPage(pn,6);
 		List<Emp> emps = empService.getEmps();
 		//使用PageInfo包装查询后的结果，只需将pageInfo返回给页面即可
 		//5：连续显示的页码数
 		PageInfo pageInfo = new PageInfo(emps,5);
-		return pageInfo;
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 //	@RequestMapping("list")
