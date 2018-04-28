@@ -11,4 +11,6 @@ import nsu.edu.cn.zsq.bean.Emp;
 
 public interface EmpService {
 	List<Emp> getEmps();
+
+	void saveEmp(Emp emp);
 }

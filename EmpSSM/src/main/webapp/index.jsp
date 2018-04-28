@@ -43,54 +43,49 @@
 						<div class="form-group">
 							<label for="ename_add_input" class="col-sm-2 control-label">ename</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="ename_add_input"
+								<input type="text" class="form-control" id="ename_add_input" name="ename"
 									placeholder="ename">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="job_add_input" class="col-sm-2 control-label">job</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="job_add_input"
+								<input type="text" class="form-control" id="job_add_input" name="job"
 									placeholder="job">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="mgr_add_input" class="col-sm-2 control-label">mgr</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="mgr_add_input"
+								<input type="text" class="form-control" id="mgr_add_input" name="mgr"
 									placeholder="mgr">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="hiredate_add_input" class="col-sm-2 control-label">hiredate</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="hiredate_add_input"
+								<input type="text" class="form-control" id="hiredate_add_input" name="hiredate"
 									placeholder="hiredate">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="sal_add_input" class="col-sm-2 control-label">sal</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="sal_add_input"
+								<input type="text" class="form-control" id="sal_add_input" name="sal"
 									placeholder="sal">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="comm_add_input" class="col-sm-2 control-label">comm</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="comm_add_input"
+								<input type="text" class="form-control" id="comm_add_input" name="comm"
 									placeholder="comm">
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="comm_add_input" class="col-sm-2 control-label">deptno</label>
+							<label for="comm_add_input" class="col-sm-2 control-label">deptName</label>
 							<div class="col-sm-4">
-								<select class="form-control">
-									<option>1</option>
-									<option>2</option>
-									<option>3</option>
-									<option>4</option>
-									<option>5</option>
+								<select class="form-control"  name="deptno">
 								</select>
 							</div>
 						</div>
@@ -98,7 +93,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">保存</button>
+					<button type="button" class="btn btn-primary" id="emp_save_btn">保存</button>
 				</div>
 			</div>
 		</div>
@@ -152,12 +147,31 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		//发送ajax请求，获得部门信息
+		getDepts();
+	
+		//点击新增按钮，弹出模态框
 		$("#emp_add_modal_btn").click(function() {
 			$("#empAddModal").modal({
 				backdrop : "static"
 			});
 		});
-
+		//查出所有的部门信息，并显示在下拉列表中
+		function getDepts(){
+			$.ajax({
+				url:"${APP_PATH}/depts.html",
+				type:"get",
+				success:function(result){
+					var result = JSON.parse(result);
+// 					console.log(result);
+					$.each(result.extend.depts,function(){
+						var optionEle = $("<option></option>").append(this.dname).attr("value",this.deptno);
+						optionEle.appendTo("#empAddModal select");
+					});
+				}
+			});
+		}
+		
 		//1.页面加载完成之后，直接发送一个ajax请求，取到分页数据
 		$(function() {
 			//去首页
@@ -165,7 +179,7 @@
 		});
 		function to_page(pn){
 			$.ajax({
-				url : "${APP_PATH}/list.html",
+				url : "${APP_PATH}/emps.html",
 				data : "pn="+pn,
 				type : "get",
 				//请求成功的回调函数
@@ -282,6 +296,27 @@
 			var navEle = $("<nav></nav>").append(ul);
 			navEle.appendTo("#page_nav_area");
 		}
+		
+		//给模态框的保存按钮添加点击事件
+		$("#emp_save_btn").click(function(){
+			
+			
+			//ajax序列号表单数据。可直接得到表单数据，不过都是字符串，需要在后台进行再次处理
+			var params= $("#empAddModal form").serialize()
+			//乱码处理
+			params = decodeURIComponent(params,true);
+			console.log("========"+params);
+			//发送ajax请求保存员工
+			$.ajax({
+				url:"${APP_PATH}/emp.html",
+				type:"post",
+				data:params,
+				success:function(result){
+					var result = JSON.parse(result);
+					alert(result.msg);
+				}
+			});
+		});
 	</script>
 </body>
 </html>

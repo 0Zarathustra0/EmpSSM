@@ -15,7 +15,7 @@ public class Emp implements Serializable{
     private String         ename;   // 员工姓名
     private String         job;     // 员工职位
     private Integer        mgr;     // 领导编号
-    private Date           hiredate; // 入职日期
+    private String           hiredate; // 入职日期
     private Double         sal;     // 员工工资
     private Double         comm;    // 员工奖金
     private Integer        deptno;  // 部门编号
@@ -24,7 +24,7 @@ public class Emp implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
     
-    public Emp(Integer empno, String ename, String job, Integer mgr, Date hiredate, Double sal, Double comm,
+    public Emp(Integer empno, String ename, String job, Integer mgr, String hiredate, Double sal, Double comm,
 			Integer deptno) {
 		super();
 		this.empno = empno;
@@ -78,12 +78,12 @@ public class Emp implements Serializable{
         this.mgr = mgr;
     }
 
-    public Date getHiredate()
+    public String getHiredate()
     {
         return hiredate;
     }
 
-    public void setHiredate(Date hiredate)
+    public void setHiredate(String hiredate)
     {
         this.hiredate = hiredate;
     }
@@ -122,6 +122,6 @@ public class Emp implements Serializable{
     public String toString() {
     	// TODO Auto-generated method stub
     	return "{empno:"+empno+"\n ename:"+ename+"\n job:"+job+"\n mgr:"+mgr+
-    			"\n hiredate:"+hiredate+"\n sal:"+sal+"\n comn:"+comm+"\n deptno}";
+    			"\n hiredate:"+hiredate+"\n sal:"+sal+"\n comn:"+comm+"\n deptno:"+deptno+"}";
     }
 }
